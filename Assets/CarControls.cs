@@ -53,6 +53,24 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LookAround"",
+                    ""type"": ""Value"",
+                    ""id"": ""71cefd4d-6f70-4cb8-9870-1c33bddf1d68"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ToggleCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""424b775c-7cf3-4b2a-9b2b-ec4d8d549344"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -308,6 +326,94 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
                     ""action"": ""Throttle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""07c0a7ed-1eb0-4e18-b4ce-193cd760b4b6"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LookAround"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""ff66c0af-aca8-45ab-b2f4-f1f4c4f1430e"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LookAround"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""759fd9c5-6611-4f36-b5b0-b7e78ac7025c"",
+                    ""path"": ""<Gamepad>/rightStick/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LookAround"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""fbd44b1c-66f3-4edc-92f2-c351498bc462"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LookAround"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""ed98ca78-6270-4fbd-b8bf-01a858e85045"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LookAround"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""073e5c50-34d9-42b2-9932-42d76f163b2a"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LookAround"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""335e54bf-581c-435a-979f-7921cd916534"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""46a80863-22a5-47b8-a755-fca4d23203da"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -347,6 +453,8 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
         m_Car_Throttle = m_Car.FindAction("Throttle", throwIfNotFound: true);
         m_Car_Steer = m_Car.FindAction("Steer", throwIfNotFound: true);
         m_Car_Handbrake = m_Car.FindAction("Handbrake", throwIfNotFound: true);
+        m_Car_LookAround = m_Car.FindAction("LookAround", throwIfNotFound: true);
+        m_Car_ToggleCamera = m_Car.FindAction("ToggleCamera", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
@@ -414,6 +522,8 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Car_Throttle;
     private readonly InputAction m_Car_Steer;
     private readonly InputAction m_Car_Handbrake;
+    private readonly InputAction m_Car_LookAround;
+    private readonly InputAction m_Car_ToggleCamera;
     public struct CarActions
     {
         private @CarControls m_Wrapper;
@@ -421,6 +531,8 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
         public InputAction @Throttle => m_Wrapper.m_Car_Throttle;
         public InputAction @Steer => m_Wrapper.m_Car_Steer;
         public InputAction @Handbrake => m_Wrapper.m_Car_Handbrake;
+        public InputAction @LookAround => m_Wrapper.m_Car_LookAround;
+        public InputAction @ToggleCamera => m_Wrapper.m_Car_ToggleCamera;
         public InputActionMap Get() { return m_Wrapper.m_Car; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -439,6 +551,12 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
             @Handbrake.started += instance.OnHandbrake;
             @Handbrake.performed += instance.OnHandbrake;
             @Handbrake.canceled += instance.OnHandbrake;
+            @LookAround.started += instance.OnLookAround;
+            @LookAround.performed += instance.OnLookAround;
+            @LookAround.canceled += instance.OnLookAround;
+            @ToggleCamera.started += instance.OnToggleCamera;
+            @ToggleCamera.performed += instance.OnToggleCamera;
+            @ToggleCamera.canceled += instance.OnToggleCamera;
         }
 
         private void UnregisterCallbacks(ICarActions instance)
@@ -452,6 +570,12 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
             @Handbrake.started -= instance.OnHandbrake;
             @Handbrake.performed -= instance.OnHandbrake;
             @Handbrake.canceled -= instance.OnHandbrake;
+            @LookAround.started -= instance.OnLookAround;
+            @LookAround.performed -= instance.OnLookAround;
+            @LookAround.canceled -= instance.OnLookAround;
+            @ToggleCamera.started -= instance.OnToggleCamera;
+            @ToggleCamera.performed -= instance.OnToggleCamera;
+            @ToggleCamera.canceled -= instance.OnToggleCamera;
         }
 
         public void RemoveCallbacks(ICarActions instance)
@@ -520,6 +644,8 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
         void OnThrottle(InputAction.CallbackContext context);
         void OnSteer(InputAction.CallbackContext context);
         void OnHandbrake(InputAction.CallbackContext context);
+        void OnLookAround(InputAction.CallbackContext context);
+        void OnToggleCamera(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
