@@ -1,12 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
-    public Camera[] cameras; // Array to hold the cameras
-    private int currentCameraIndex = 0; // Index of the current active camera
+    [SerializeField]
+    Camera[] cameras;
+
+    [SerializeField]
+    GameObject car;
+    Vector3 carPosition;
+    Vector2 _rightStickInputValue;
+
+    private int currentCameraIndex = 0;
+    private float rotationSpeed = 200f;
+
+    private InputAction _cameraRotateAction;
+
+    private void OnEnable()
+    {
+        // Assign the _cameraRotateAction in the OnEnable method
+        _cameraRotateAction = GetComponent<PlayerInput>().actions.FindAction("RotateCamera");
+    }
 
     void Start()
     {
@@ -15,6 +32,12 @@ public class CameraController : MonoBehaviour
         {
             cameras[i].gameObject.SetActive(i == 0);
         }
+    }
+
+    private void LateUpdate()
+    {
+        carPosition = car.transform.position;
+        RotateCamera();
     }
 
     public void ToggleCameras(InputAction.CallbackContext context)
@@ -29,6 +52,30 @@ public class CameraController : MonoBehaviour
 
             // Enable the next camera
             cameras[currentCameraIndex].gameObject.SetActive(true);
+        }
+    }
+
+    private void RotateCamera()
+    {
+        if (_cameraRotateAction != null)
+        {
+            _rightStickInputValue = _cameraRotateAction.ReadValue<Vector2>();
+
+            // Apply dead zone to input values
+            if (_rightStickInputValue.magnitude < 0.1f)
+            {
+                _rightStickInputValue = Vector2.zero;
+            }
+
+            if (_rightStickInputValue != Vector2.zero)
+            {
+                // Rotate the camera around the car based on input
+                float rotationX = _rightStickInputValue.y * rotationSpeed * Time.deltaTime;
+                float rotationY = _rightStickInputValue.x * rotationSpeed * Time.deltaTime;
+
+                cameras[currentCameraIndex].gameObject.transform.RotateAround(carPosition, Vector3.up, rotationY);
+                cameras[currentCameraIndex].gameObject.transform.RotateAround(carPosition, Vector3.right, -rotationX);
+            }
         }
     }
 }

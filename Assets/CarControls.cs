@@ -55,7 +55,7 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""LookAround"",
+                    ""name"": ""RotateCamera"",
                     ""type"": ""Value"",
                     ""id"": ""71cefd4d-6f70-4cb8-9870-1c33bddf1d68"",
                     ""expectedControlType"": ""Vector2"",
@@ -334,7 +334,7 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LookAround"",
+                    ""action"": ""RotateCamera"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -345,7 +345,7 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LookAround"",
+                    ""action"": ""RotateCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -356,7 +356,7 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LookAround"",
+                    ""action"": ""RotateCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -367,7 +367,7 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LookAround"",
+                    ""action"": ""RotateCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -378,7 +378,7 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LookAround"",
+                    ""action"": ""RotateCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -389,7 +389,7 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LookAround"",
+                    ""action"": ""RotateCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -453,7 +453,7 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
         m_Car_Throttle = m_Car.FindAction("Throttle", throwIfNotFound: true);
         m_Car_Steer = m_Car.FindAction("Steer", throwIfNotFound: true);
         m_Car_Handbrake = m_Car.FindAction("Handbrake", throwIfNotFound: true);
-        m_Car_LookAround = m_Car.FindAction("LookAround", throwIfNotFound: true);
+        m_Car_RotateCamera = m_Car.FindAction("RotateCamera", throwIfNotFound: true);
         m_Car_ToggleCamera = m_Car.FindAction("ToggleCamera", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -522,7 +522,7 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Car_Throttle;
     private readonly InputAction m_Car_Steer;
     private readonly InputAction m_Car_Handbrake;
-    private readonly InputAction m_Car_LookAround;
+    private readonly InputAction m_Car_RotateCamera;
     private readonly InputAction m_Car_ToggleCamera;
     public struct CarActions
     {
@@ -531,7 +531,7 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
         public InputAction @Throttle => m_Wrapper.m_Car_Throttle;
         public InputAction @Steer => m_Wrapper.m_Car_Steer;
         public InputAction @Handbrake => m_Wrapper.m_Car_Handbrake;
-        public InputAction @LookAround => m_Wrapper.m_Car_LookAround;
+        public InputAction @RotateCamera => m_Wrapper.m_Car_RotateCamera;
         public InputAction @ToggleCamera => m_Wrapper.m_Car_ToggleCamera;
         public InputActionMap Get() { return m_Wrapper.m_Car; }
         public void Enable() { Get().Enable(); }
@@ -551,9 +551,9 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
             @Handbrake.started += instance.OnHandbrake;
             @Handbrake.performed += instance.OnHandbrake;
             @Handbrake.canceled += instance.OnHandbrake;
-            @LookAround.started += instance.OnLookAround;
-            @LookAround.performed += instance.OnLookAround;
-            @LookAround.canceled += instance.OnLookAround;
+            @RotateCamera.started += instance.OnRotateCamera;
+            @RotateCamera.performed += instance.OnRotateCamera;
+            @RotateCamera.canceled += instance.OnRotateCamera;
             @ToggleCamera.started += instance.OnToggleCamera;
             @ToggleCamera.performed += instance.OnToggleCamera;
             @ToggleCamera.canceled += instance.OnToggleCamera;
@@ -570,9 +570,9 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
             @Handbrake.started -= instance.OnHandbrake;
             @Handbrake.performed -= instance.OnHandbrake;
             @Handbrake.canceled -= instance.OnHandbrake;
-            @LookAround.started -= instance.OnLookAround;
-            @LookAround.performed -= instance.OnLookAround;
-            @LookAround.canceled -= instance.OnLookAround;
+            @RotateCamera.started -= instance.OnRotateCamera;
+            @RotateCamera.performed -= instance.OnRotateCamera;
+            @RotateCamera.canceled -= instance.OnRotateCamera;
             @ToggleCamera.started -= instance.OnToggleCamera;
             @ToggleCamera.performed -= instance.OnToggleCamera;
             @ToggleCamera.canceled -= instance.OnToggleCamera;
@@ -644,7 +644,7 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
         void OnThrottle(InputAction.CallbackContext context);
         void OnSteer(InputAction.CallbackContext context);
         void OnHandbrake(InputAction.CallbackContext context);
-        void OnLookAround(InputAction.CallbackContext context);
+        void OnRotateCamera(InputAction.CallbackContext context);
         void OnToggleCamera(InputAction.CallbackContext context);
     }
     public interface IUIActions

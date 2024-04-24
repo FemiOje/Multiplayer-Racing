@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LookAround",
+                    "name": "RotateCamera",
                     "type": "Value",
                     "id": "71cefd4d-6f70-4cb8-9870-1c33bddf1d68",
                     "expectedControlType": "Vector2",
@@ -312,7 +312,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LookAround",
+                    "action": "RotateCamera",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -323,7 +323,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LookAround",
+                    "action": "RotateCamera",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -334,7 +334,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LookAround",
+                    "action": "RotateCamera",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -345,7 +345,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LookAround",
+                    "action": "RotateCamera",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -356,7 +356,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LookAround",
+                    "action": "RotateCamera",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -367,7 +367,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LookAround",
+                    "action": "RotateCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

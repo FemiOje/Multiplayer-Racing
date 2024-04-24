@@ -658,7 +658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carTransform: {fileID: 543450653621877418}
-  followSpeed: 5
+  followSpeed: 10
   lookSpeed: 10
 --- !u!1 &339336049
 GameObject:
@@ -4332,8 +4332,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carTransform: {fileID: 543450653621877418}
-  followSpeed: 5
-  lookSpeed: 5.5
+  followSpeed: 10
+  lookSpeed: 10
 --- !u!1 &1723628489
 GameObject:
   m_ObjectHideFlags: 0
@@ -4519,7 +4519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carTransform: {fileID: 543450653621877418}
-  followSpeed: 5
+  followSpeed: 10
   lookSpeed: 10
 --- !u!1 &2007649507
 GameObject:
@@ -5346,6 +5346,7 @@ MonoBehaviour:
   - {fileID: 1697935063}
   - {fileID: 287972217}
   - {fileID: 1772825686}
+  car: {fileID: 1039184355}
 --- !u!23 &611453169335501186
 MeshRenderer:
   m_ObjectHideFlags: 0

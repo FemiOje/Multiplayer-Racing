@@ -177,8 +177,8 @@ public class PrometeoCarController : MonoBehaviour
     float _throttleInputValue = 0f;
     float _steeringInputValue = 0f;
 
-    InputActionAsset _inputActionAsset;
-    InputActionMap _carActionMap;
+    public static InputActionAsset _inputActionAsset;
+    public static InputActionMap _carActionMap;
     InputAction _throttleAction;
     InputAction _steerAction;
 
@@ -208,8 +208,6 @@ public class PrometeoCarController : MonoBehaviour
         //in the inspector.
         carRigidbody = gameObject.GetComponent<Rigidbody>();
         carRigidbody.centerOfMass = bodyMassCenter;
-
-        /// Caching the Input Actions from new Input System
 
 
         //Initial setup to calculate the drift value of the car. This part could look a bit
