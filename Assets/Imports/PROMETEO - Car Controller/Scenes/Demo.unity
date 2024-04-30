@@ -4348,6 +4348,7 @@ MonoBehaviour:
   - {fileID: 1697935064}
   - {fileID: 1772825687}
   - {fileID: 287972218}
+  _rotationSpeed: 200
   player: {fileID: 543450653621877418}
   offset: {x: 0, y: 5, z: 0}
   _lerpSpeed: 2
@@ -5187,7 +5188,7 @@ MonoBehaviour:
     m_ActionName: Car/LookAround[/XInputControllerWindows1/rightStick/up,/XInputControllerWindows1/rightStick/y,/XInputControllerWindows1/rightStick/left,/XInputControllerWindows1/rightStick/right,/Mouse/delta]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2004382769}
         m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
         m_MethodName: ToggleCameras
         m_Mode: 0

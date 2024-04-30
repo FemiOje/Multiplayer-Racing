@@ -7,10 +7,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] Transform[] cameraPositions;
     Vector2 _rightStickInputValue;
     int _cameraIndex = 0;
-    float _rotationSpeed = 200f;
-
+    [SerializeField] float _rotationSpeed = 40f;
     InputAction _cameraRotateAction;
-
     public Transform player;
     Rigidbody _playerRb;
     public Vector3 offset;
@@ -18,7 +16,7 @@ public class CameraController : MonoBehaviour
 
     private void OnEnable()
     {
-        _cameraRotateAction = GetComponent<PlayerInput>().actions.FindAction("RotateCamera");
+        _cameraRotateAction = player.gameObject.GetComponent<PlayerInput>().actions.FindAction("RotateCamera");
     }
 
     void Start()
@@ -30,12 +28,16 @@ public class CameraController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        UpdateCameraPosition();
         // RotateCamera();
+    }
 
+    private void UpdateCameraPosition()
+    {
         Vector3 playerForward = (_playerRb.velocity + player.transform.forward).normalized;
         transform.position = Vector3.Lerp(
             transform.position,
-            player.position + player.transform.TransformVector(offset) + playerForward * (-5f),
+            cameraPositions[_cameraIndex].gameObject.transform.position + playerForward * (-5f),
             _lerpSpeed * Time.deltaTime
         );
         transform.LookAt(player);
@@ -45,8 +47,7 @@ public class CameraController : MonoBehaviour
     {
         if (context.performed)
         {
-            _cameraIndex = (_cameraIndex + 1) % cameraPositions.Length;
-            _camera.transform.position = cameraPositions[_cameraIndex].gameObject.transform.position;
+            IncreaseCameraIndex();
         }
     }
 
@@ -69,24 +70,20 @@ public class CameraController : MonoBehaviour
                 float rotationY = _rightStickInputValue.x * _rotationSpeed * Time.deltaTime;
 
                 // Calculate current angles of the camera
-                Vector3 currentAngles = _camera
-                    .gameObject
-                    .transform
-                    .eulerAngles;
+                Vector3 currentAngles = _camera.gameObject.transform.eulerAngles;
 
                 // Apply rotation limits
                 float newXAngle = Mathf.Clamp(currentAngles.x - rotationX, 5f, 80f); // Adjust the min and max values as needed
                 float newYAngle = currentAngles.y + rotationY;
 
                 // Apply rotation to camera
-                _camera.gameObject.transform.rotation = Quaternion.Euler(
-                    newXAngle,
-                    newYAngle,
-                    0f
-                );
+                _camera.gameObject.transform.rotation = Quaternion.Euler(newXAngle, newYAngle, 0f);
             }
         }
     }
 
-    private void UpdateCameraPosition() { }
+    private int IncreaseCameraIndex()
+    {
+        return _cameraIndex = (_cameraIndex + 1) % cameraPositions.Length;
+    }
 }
