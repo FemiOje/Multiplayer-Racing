@@ -1,57 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField]
-    Camera[] cameras;
-
-    [SerializeField]
-    GameObject car;
-    Vector3 carPosition;
+    Camera _camera;
+    [SerializeField] Transform[] cameraPositions;
     Vector2 _rightStickInputValue;
+    int _cameraIndex = 0;
+    float _rotationSpeed = 200f;
 
-    private int currentCameraIndex = 0;
-    private float rotationSpeed = 200f;
+    InputAction _cameraRotateAction;
 
-    private InputAction _cameraRotateAction;
+    public Transform player;
+    Rigidbody _playerRb;
+    public Vector3 offset;
+    [SerializeField] float _lerpSpeed;
 
     private void OnEnable()
     {
-        // Assign the _cameraRotateAction in the OnEnable method
         _cameraRotateAction = GetComponent<PlayerInput>().actions.FindAction("RotateCamera");
     }
 
     void Start()
     {
-        // Ensure only the first camera is active at start
-        for (int i = 0; i < cameras.Length; i++)
-        {
-            cameras[i].gameObject.SetActive(i == 0);
-        }
+        _playerRb = player.GetComponent<Rigidbody>();
+        _camera = GetComponent<Camera>();
+        _camera.transform.position = cameraPositions[_cameraIndex].gameObject.transform.position;
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
-        carPosition = car.transform.position;
-        RotateCamera();
+        // RotateCamera();
+
+        Vector3 playerForward = (_playerRb.velocity + player.transform.forward).normalized;
+        transform.position = Vector3.Lerp(
+            transform.position,
+            player.position + player.transform.TransformVector(offset) + playerForward * (-5f),
+            _lerpSpeed * Time.deltaTime
+        );
+        transform.LookAt(player);
     }
 
     public void ToggleCameras(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            // Disable the current camera
-            cameras[currentCameraIndex].gameObject.SetActive(false);
-
-            // Increment the camera index, wrapping around if necessary
-            currentCameraIndex = (currentCameraIndex + 1) % cameras.Length;
-
-            // Enable the next camera
-            cameras[currentCameraIndex].gameObject.SetActive(true);
+            _cameraIndex = (_cameraIndex + 1) % cameraPositions.Length;
+            _camera.transform.position = cameraPositions[_cameraIndex].gameObject.transform.position;
         }
     }
 
@@ -70,12 +65,28 @@ public class CameraController : MonoBehaviour
             if (_rightStickInputValue != Vector2.zero)
             {
                 // Rotate the camera around the car based on input
-                float rotationX = _rightStickInputValue.y * rotationSpeed * Time.deltaTime;
-                float rotationY = _rightStickInputValue.x * rotationSpeed * Time.deltaTime;
+                float rotationX = _rightStickInputValue.y * _rotationSpeed * Time.deltaTime;
+                float rotationY = _rightStickInputValue.x * _rotationSpeed * Time.deltaTime;
 
-                cameras[currentCameraIndex].gameObject.transform.RotateAround(carPosition, Vector3.up, rotationY);
-                cameras[currentCameraIndex].gameObject.transform.RotateAround(carPosition, Vector3.right, -rotationX);
+                // Calculate current angles of the camera
+                Vector3 currentAngles = _camera
+                    .gameObject
+                    .transform
+                    .eulerAngles;
+
+                // Apply rotation limits
+                float newXAngle = Mathf.Clamp(currentAngles.x - rotationX, 5f, 80f); // Adjust the min and max values as needed
+                float newYAngle = currentAngles.y + rotationY;
+
+                // Apply rotation to camera
+                _camera.gameObject.transform.rotation = Quaternion.Euler(
+                    newXAngle,
+                    newYAngle,
+                    0f
+                );
             }
         }
     }
+
+    private void UpdateCameraPosition() { }
 }

@@ -396,7 +396,7 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""335e54bf-581c-435a-979f-7921cd916534"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

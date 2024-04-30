@@ -5,10 +5,10 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour {
 
 	public Transform carTransform;
-	[Range(1, 10)]
-	public float followSpeed = 2;
-	[Range(1, 10)]
-	public float lookSpeed = 5;
+	[Range(1, 30)]
+	public float followSpeed = 20;
+	[Range(1, 30)]
+	public float lookSpeed = 20;
 	Vector3 initialCameraPosition;
 	Vector3 initialCarPosition;
 	Vector3 absoluteInitCameraPosition;
