@@ -373,6 +373,17 @@
                 },
                 {
                     "name": "",
+                    "id": "20b2756b-f5a4-4296-9e5c-91d9f117bdb6",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "335e54bf-581c-435a-979f-7921cd916534",
                     "path": "<Keyboard>/tab",
                     "interactions": "",

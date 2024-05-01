@@ -4348,10 +4348,10 @@ MonoBehaviour:
   - {fileID: 1697935064}
   - {fileID: 1772825687}
   - {fileID: 287972218}
-  _rotationSpeed: 200
   player: {fileID: 543450653621877418}
   offset: {x: 0, y: 5, z: 0}
   _lerpSpeed: 2
+  _cameraRotateSpeed: 40
 --- !u!20 &2004382770
 Camera:
   m_ObjectHideFlags: 0
@@ -5131,35 +5131,11 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 543450653621877422}
-        m_TargetAssemblyTypeName: PrometeoCarController, Assembly-CSharp
-        m_MethodName: HandleThrottle
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 31bfeb19-288c-4e46-aeae-521fb9231825
     m_ActionName: Car/Move[/XInputControllerWindows1/leftTrigger,/XInputControllerWindows1/rightTrigger,/Keyboard/downArrow,/Keyboard/upArrow,/Keyboard/s,/Keyboard/w]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 543450653621877422}
-        m_TargetAssemblyTypeName: PrometeoCarController, Assembly-CSharp
-        m_MethodName: HandleSteering
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: d878ce6d-172c-46a7-92cf-78b3bade0cde
     m_ActionName: Car/Turn[/XInputControllerWindows1/leftStick/left,/XInputControllerWindows1/leftStick/right,/Keyboard/a,/Keyboard/d,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
